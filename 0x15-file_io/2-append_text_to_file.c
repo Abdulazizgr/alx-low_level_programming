@@ -2,14 +2,14 @@
 
 /**
  * append_text_to_file - appends text at the end of a file
- * @filename: file to append the text to
- * @text_content: content to append into the file
+ * @filename: the name of the file to append the text to
+ * @text_content: the content to append into the file
  *
- * Return: 1 on success and -1 on failure
+ * Return: 1 on success, -1 on failure.
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int fd, a, b = 0;
+	int fd, fw, tl = 0;
 
 	if (!filename)
 		return (-1);
@@ -20,10 +20,11 @@ int append_text_to_file(const char *filename, char *text_content)
 
 	if (text_content)
 	{
-		while (text_content[b])
-			b++;
-		a = write(fd, text_content, b);
-		if (a != b)
+		while (text_content[tl])
+			tl++;
+
+		fw = write(fd, text_content, tl);
+		if (fw != tl)
 			return (-1);
 	}
 
